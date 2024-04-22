@@ -1,16 +1,16 @@
 config:
-  target: "http://localhost:3000"
+  target: "https://good-erin-scarab-tutu.cyclic.app"
   phases:
     - duration: 2
       arrivalRate: 5
       name: Warm up
-    - duration: 10
-      arrivalRate: 5
+    - duration: 2
+      arrivalRate: 10
       rampTo: 150
       name: Ramp up load
-    - duration: 20
+    - duration: 2
       arrivalRate: 3
-      maxVusers: 100
+      maxVusers: 20
       name: Sustained load
 
 scenarios:
