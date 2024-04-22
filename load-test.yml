@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 2
+      arrivalRate: 5
+      name: Warm up
+    - duration: 10
+      arrivalRate: 5
+      rampTo: 150
+      name: Ramp up load
+    - duration: 20
+      arrivalRate: 3
+      maxVusers: 100
+      name: Sustained load
+
+scenarios:
+  - name: "Retrieve data"
+    flow:
+      - get:
+          url: "/customers/103/products"
