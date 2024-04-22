@@ -41,4 +41,4 @@ jobs:
         - name: Execute load tests
           uses: artilleryio/action-cli@v1
           with:
-            command: run tests/performance/products.yml
+            command: run test/performance/products.yml
