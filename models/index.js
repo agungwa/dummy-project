@@ -1,10 +1,12 @@
 // models/index.js
 
-const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config()
+import { Sequelize, DataTypes } from 'sequelize';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Create Sequelize instance
-const sequelize = new Sequelize( database = process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+const sequelize = new Sequelize( process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   dialect: 'mysql'
@@ -158,7 +160,9 @@ const Employees = sequelize.define('employees', {
 const Customers = sequelize.define('customers', {
   customerNumber: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true
+
   },
   customerName: {
     type: DataTypes.STRING(50),
@@ -320,12 +324,12 @@ Products.hasMany(OrderDetails, { foreignKey: 'productCode' });
 OrderDetails.belongsTo(Products, { foreignKey: 'productCode' });
 
 // Export models
-module.exports = {
+export {
   ProductLines,
   Products,
   Employees,
   Customers,
   Offices,
   Orders,
-  OrderDetails
+  OrderDetails,
 };

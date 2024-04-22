@@ -67,39 +67,7 @@ API Endpoints
     "totalOrderAmount": 22314.36,
     "totalOrderQty": 270,
     "totalOrderProduct": 7,
-    "orders": [
-        {
-            "orderNumber": 10123,
-            "orderDate": "2003-05-20",
-            "requiredDate": "2003-05-29",
-            "shippedDate": "2003-05-22",
-            "status": "Shipped",
-            "comments": null,
-            "customerNumber": 103,
-            "orderdetails": [
-                {
-                    "orderNumber": 10123,
-                    "productCode": "S18_1589",
-                    "quantityOrdered": 26,
-                    "priceEach": "120.71",
-                    "orderLineNumber": 2,
-                    "product": {
-                        "productCode": "S18_1589",
-                        "productName": "1965 Aston Martin DB5",
-                        "productLine": "Classic Cars",
-                        "productScale": "1:18",
-                        "productVendor": "Classic Metal Creations",
-                        "productDescription": "Die-cast model of the silver 1965 Aston Martin DB5 in silver. This model includes full wire wheels and doors that open with fully detailed passenger compartment. In 1:18 scale, this model measures approximately 10 inches/20 cm long.",
-                        "quantityInStock": 9042,
-                        "buyPrice": "65.96",
-                        "MSRP": "124.44"
-                    }
-                },
-             ...
-            ]
-        },
-    ...
-    ]}
+    "orders": [...orders]}
     
 
 Contributing

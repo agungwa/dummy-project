@@ -1,25 +1,17 @@
-// routes/products.js
+import express from 'express';
+import { Customers, Products, OrderDetails, Orders } from '../models/index.js';
+import { json } from 'sequelize';
 
-const express = require('express');
 const router = express.Router();
-const { Customers, Products, OrderDetails, Orders } = require('../models');
-const { json } = require('sequelize');
 
 // GET products by customer ID
 router.get('/:customerId/products', async (req, res) => {
   try {
     const customerId = req.params.customerId;
-    const customer = await Customers.findByPk(customerId);
+    const customer = await Customers.findByPk(customerId,{raw: true});
     if (!customer) {
       return res.status(404).json({ error: 'Customer not found' });
     }
-
-    // const products = await OrderDetails.findAll({
-    //   include: [{
-    //     model: Orders,
-    //     where: { customerNumber: customerId}
-    //   }]
-    // });
 
     const orders = await Orders.findAll({
       include: [
@@ -28,8 +20,11 @@ router.get('/:customerId/products', async (req, res) => {
           include: 'product'
         }
       ],
-      where: { customerNumber: customerId}
+      where: { customerNumber: customerId},
+      raw: true,
+      nest: true
     });
+
     // Check if orders exist
     if (!orders || orders.length === 0) {
       return res.status(404).json({ message: 'No orders found for the specified customer' });
@@ -40,11 +35,9 @@ router.get('/:customerId/products', async (req, res) => {
     let totalOrderQty = 0;
     let totalOrderProduct = 0;
     orders.forEach(order => {
-      order.orderdetails.forEach(orderDetail => {
-        totalOrderAmount += orderDetail.quantityOrdered * orderDetail.priceEach;
-        totalOrderQty += orderDetail.quantityOrdered
+        totalOrderAmount += order.orderdetails.quantityOrdered * order.orderdetails.priceEach;
+        totalOrderQty += order.orderdetails.quantityOrdered
         totalOrderProduct ++
-      });
     });
 
     res.json({ totalOrderAmount, totalOrderQty, totalOrderProduct, orders});
@@ -54,4 +47,4 @@ router.get('/:customerId/products', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
