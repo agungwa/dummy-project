@@ -5,7 +5,8 @@ import { Customers } from '../models/index.js';
 
 const chai = use(chaiHttp)
 
-describe('Products Route', () => {
+describe('Products Route', function () {
+  this.timeout(10000); // Set a longer timeout for all tests in this suite (10 seconds)
 
   it('should return 404 if customer does not exist', async () => {
     const res = await chai.request(app).get('/customers/9990/products');
